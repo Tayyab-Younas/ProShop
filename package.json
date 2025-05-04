@@ -1,0 +1,31 @@
+{
+  "name": "proshop",
+  "version": "1.0.0",
+  "description": "eCommerace application built with the MERN stack",
+  "homepage": "https://github.com/Tayyab-Younas/ProShop#readme",
+  "bugs": {
+    "url": "https://github.com/Tayyab-Younas/ProShop/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tayyab-Younas/ProShop.git"
+  },
+  "license": "MIT",
+  "author": "Tayyab Younas",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "server": "node backend/server.js",
+    "client": "npm start --perfix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\" "
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "dotenv": "^16.5.0",
+    "nodemon": "^3.1.10"
+  }
+}
