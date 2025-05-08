@@ -1,6 +1,5 @@
     const Products= [
         {
-            _id:'1',
             name:'Airpods Wireless Bluethooth Headphone',
             image:'/images/airpods.jpg',
             description:
@@ -13,7 +12,6 @@
             numReviews : 3,
         },
         {
-            _id:'2',
             name:'alexa',
             image:'/images/alexa.jpg',
             description:
@@ -26,7 +24,6 @@
             numReviews : 12,
         },
         {
-            _id:'3',
             name:'camera',
             image:'/images/camera.jpg',
             description:
@@ -39,7 +36,6 @@
             numReviews : 12,
         },
         {
-            _id:'4',
             name:'mouse',
             image:'/images/mouse.jpg',
             description:
@@ -52,7 +48,6 @@
             numReviews : 12,
         },
         {
-            _id:'5',
             name:'phone',
             image:'/images/phone.jpg',
             description:
@@ -65,5 +60,5 @@
             numReviews : 12,
         },
     ]
-    export default Products
+    export default Products;
 

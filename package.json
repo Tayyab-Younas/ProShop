@@ -17,10 +17,15 @@
   "scripts": {
     "start": "node backend/server.js",
     "server": "node backend/server.js",
-    "client": "npm start --perfix frontend",
-    "dev": "concurrently \"npm run server\" \"npm run client\" "
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\" ",
+    "data:import": "node backend/seeder.js",
+    "data:destroy": "node backend/seeder.js -d"
   },
   "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "color": "^5.0.0",
+    "colors": "^1.4.0",
     "express": "^5.1.0",
     "mongoose": "^8.14.1"
   },
