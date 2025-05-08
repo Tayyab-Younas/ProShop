@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import ConnectDB from "./config/db.js";
 import productRoutes from "./routes/productRoutes.js";
+import {  notFound , errorHandler } from "./middleware/errorMiddle.js";
 const port = process.env.PORT || 5000;
 
 ConnectDB(); // Connect to MongoDB
@@ -14,5 +15,7 @@ app.get("/", (req, res) => {
   });
 
 app.use("/api/products", productRoutes);
-  
+
+app.use(notFound);
+app.use(errorHandler);
 app.listen(port, () => console.log(`Server is running on port ${port}`));
