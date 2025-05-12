@@ -23,9 +23,9 @@ const oderSchema = new mongoose.Schema(
     ],
 
     shippingAddress: {
-      address: { 
-        type: String, 
-        required: true, 
+      address: {
+        type: String,
+        required: true,
       },
       city: {
         type: String,

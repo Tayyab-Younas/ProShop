@@ -3,19 +3,18 @@ import { Outlet } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
-
 const App = () => {
   return (
     <>
-    <Header/>
-    <main className="py-3">
-      <Container>
-          <Outlet/>
-      </Container>
+      <Header />
+      <main className="py-3">
+        <Container>
+          <Outlet />
+        </Container>
       </main>
       <Footer />
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;

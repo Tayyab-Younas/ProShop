@@ -17,4 +17,4 @@ const getProductById = asyncHandler(async (req, res) => {
   throw new Error("Resource not found");
 });
 
-export {getProducts, getProductById};
+export { getProducts, getProductById };

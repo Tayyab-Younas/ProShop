@@ -8,17 +8,16 @@ export const productsApiSlice = apiSlice.injectEndpoints({
       query: () => ({
         url: PRODUCTS_ULR,
       }),
-      keepUnusedDataFor: 5 ,
+      keepUnusedDataFor: 5,
     }),
     getProductDetails: builder.query({
-      query:(productId)=>({
+      query: (productId) => ({
         url: `${PRODUCTS_ULR}/${productId}`,
-
       }),
-      keepUnusedDataFor: 5 ,
-
-    })
+      keepUnusedDataFor: 5,
+    }),
   }),
 });
 
-export const { useGetProductsQuery, useGetProductDetailsQuery } = productsApiSlice;
+export const { useGetProductsQuery, useGetProductDetailsQuery } =
+  productsApiSlice;

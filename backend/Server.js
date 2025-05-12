@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import ConnectDB from "./config/db.js";
 import productRoutes from "./routes/productRoutes.js";
-import {  notFound , errorHandler } from "./middleware/errorMiddle.js";
+import { notFound, errorHandler } from "./middleware/errorMiddle.js";
 const port = process.env.PORT || 5000;
 
 ConnectDB(); // Connect to MongoDB
@@ -11,8 +11,8 @@ ConnectDB(); // Connect to MongoDB
 const app = express();
 
 app.get("/", (req, res) => {
-    res.send("API is running...");
-  });
+  res.send("API is running...");
+});
 
 app.use("/api/products", productRoutes);
 

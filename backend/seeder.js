@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import colors from "colors"
+import colors from "colors";
 import users from "./data/users.js";
 import Products from "./data/products.js";
 import connectDB from "./config/db.js";
@@ -51,8 +51,8 @@ const dataDestroy = async () => {
   }
 };
 
-if (process.argv[2] === '-d') {
-    dataDestroy();
+if (process.argv[2] === "-d") {
+  dataDestroy();
 } else {
-    importData();
+  importData();
 }
