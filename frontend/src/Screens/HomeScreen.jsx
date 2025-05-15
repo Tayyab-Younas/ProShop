@@ -4,7 +4,7 @@ import { useGetProductsQuery } from "../slices/productsApiSlice";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 
-const HomeScreens = () => {
+const HomeScreen = () => {
   const { data: Products, isLoading, error } = useGetProductsQuery();
 
   return (
@@ -31,4 +31,4 @@ const HomeScreens = () => {
     </>
   );
 };
-export default HomeScreens;
+export default HomeScreen;
