@@ -9,15 +9,33 @@ import {
   ListGroup,
 } from "react-bootstrap";
 import { FaTrash } from "react-icons/fa";
-import Message from "../components/Message";
 import { useDispatch, useSelector } from "react-redux";
+import Message from "../components/Message";
+import { addToCart, removeFromCart  } from "../slices/cartSlice";
 
 const CartScreen = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
+  
+  const addToCartHandler = (product, quantity) => {
+    dispatch(addToCart({ ...product, quantity }));
+  };
+
+  const removeFromCartHandler = (id) => {
+    dispatch(removeFromCart(id));
+  };
+
+  const checkOutHandler = ()=> {
+
+    navigate('/login?redirect=/shipping');
+
+
+  }
+  
 
   return (
     <Row>
@@ -45,7 +63,9 @@ const CartScreen = () => {
                     <Form.Control
                       as="select"
                       value={item.quantity}
-                      onChange={(e) => Number(e.target.value)}
+                      onChange={(e) =>
+                        addToCartHandler(item, Number(e.target.value))
+                      }
                     >
                       {[...Array(item.countInStock).keys()].map((x) => (
                         <option key={x + 1} value={x + 1}>
@@ -55,7 +75,7 @@ const CartScreen = () => {
                     </Form.Control>
                   </Col>
                   <Col md={2}>
-                    <Button type="button" variant="light">
+                    <Button type="button" variant="light" onClick={()=> removeFromCartHandler(item._id)}>
                       <FaTrash />
                     </Button>
                   </Col>
@@ -83,6 +103,7 @@ const CartScreen = () => {
                 type="button"
                 className="bnt-block"
                 disabled={cartItems.length === 0}
+                onClick={checkOutHandler}
               >
                 Proceed To Checkout
               </Button>
