@@ -2,14 +2,30 @@ import asyncHandler from "../middleware/asyncHandler.js";
 import User from "../models/userModel.js";
 
 // @desc  Login user
-// @route Post /api/user/login
+// @route Post /api/users/login
 // @access  Public
 const logInUser = asyncHandler(async (req, res) => {
-  res.send("login User");
+  console.log(req.body);
+
+  const { email, password } = req.body;
+
+  const user = await User.findOne({ email });
+
+  if (user && (await user.matchPassword(password))) {
+    res.json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin,
+    });
+  } else {
+    res.status(401);
+    throw new Error("Invalid email or password");
+  }
 });
 
 // @desc  Register user
-// @route Post /api/user
+// @route Post /api/users
 // @access  Public
 
 const registerUser = asyncHandler(async (req, res) => {
@@ -17,7 +33,7 @@ const registerUser = asyncHandler(async (req, res) => {
 });
 
 // @desc  Logout user / clear cookie
-// @route Post /api/user/logout
+// @route Post /api/users/logout
 // @access  Private
 
 const logOutUser = asyncHandler(async (req, res) => {
@@ -25,7 +41,7 @@ const logOutUser = asyncHandler(async (req, res) => {
 });
 
 // @desc  Get user profile
-// @route Get /api/user/profile
+// @route Get /api/users/profile
 // @access  private
 
 const getUserProfile = asyncHandler(async (req, res) => {
@@ -33,7 +49,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
 });
 
 // @desc  update user profile
-// @route  Put /api/user/profile
+// @route  Put /api/users/profile
 // @access  Private
 
 const updateUserProfile = asyncHandler(async (req, res) => {
@@ -48,7 +64,6 @@ const getUsers = asyncHandler(async (req, res) => {
   res.send("get Users");
 });
 
-
 // @desc  Get user by ID
 // @route Get /api/users/:id
 // @access  Private/Admin
@@ -56,8 +71,6 @@ const getUsers = asyncHandler(async (req, res) => {
 const getUserByID = asyncHandler(async (req, res) => {
   res.send("get User by Id");
 });
-
-
 
 // @desc  Delete user
 // @route Delete /api/users/:id
