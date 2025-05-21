@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useParams , useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import {
   Row,
@@ -15,10 +15,9 @@ import Rating from "../components/Rating";
 import { useGetProductDetailsQuery } from "../slices/productsApiSlice";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import { addToCart } from '../slices/cartSlice' 
+import { addToCart } from "../slices/cartSlice";
 
 const ProductScreen = () => {
-
   const { id: productId } = useParams();
 
   const dispatch = useDispatch();
@@ -34,12 +33,10 @@ const ProductScreen = () => {
   } = useGetProductDetailsQuery(productId);
 
   const addToCartHandler = () => {
+    dispatch(addToCart({ ...product, quantity }));
 
-      dispatch(addToCart({...product , quantity}));
-
-      navigate('/cart');
-  } 
-
+    navigate("/cart");
+  };
 
   return (
     <>
@@ -106,19 +103,19 @@ const ProductScreen = () => {
                         <Col>Quantity</Col>
                         <Col>
                           <Form.Control
-                            as='select'
+                            as="select"
                             value={quantity}
                             onChange={(e) =>
                               setQuantity(Number(e.target.value))
                             }
                           >
-                            {[...Array(product.countInStock).keys()].map((x)=>(
-
-                              <option key={x+1} value={x+1}>
-                                {x+1}
-                              </option>
-
-                            )) }
+                            {[...Array(product.countInStock).keys()].map(
+                              (x) => (
+                                <option key={x + 1} value={x + 1}>
+                                  {x + 1}
+                                </option>
+                              )
+                            )}
                           </Form.Control>
                         </Col>
                       </Row>

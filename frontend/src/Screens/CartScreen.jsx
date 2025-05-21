@@ -11,16 +11,15 @@ import {
 import { FaTrash } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
-import { addToCart, removeFromCart  } from "../slices/cartSlice";
+import { addToCart, removeFromCart } from "../slices/cartSlice";
 
 const CartScreen = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
-  
+
   const addToCartHandler = (product, quantity) => {
     dispatch(addToCart({ ...product, quantity }));
   };
@@ -29,13 +28,9 @@ const CartScreen = () => {
     dispatch(removeFromCart(id));
   };
 
-  const checkOutHandler = ()=> {
-
-    navigate('/login?redirect=/shipping');
-
-
-  }
-  
+  const checkOutHandler = () => {
+    navigate("/login?redirect=/shipping");
+  };
 
   return (
     <Row>
@@ -75,7 +70,11 @@ const CartScreen = () => {
                     </Form.Control>
                   </Col>
                   <Col md={2}>
-                    <Button type="button" variant="light" onClick={()=> removeFromCartHandler(item._id)}>
+                    <Button
+                      type="button"
+                      variant="light"
+                      onClick={() => removeFromCartHandler(item._id)}
+                    >
                       <FaTrash />
                     </Button>
                   </Col>
