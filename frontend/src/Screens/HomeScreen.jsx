@@ -27,7 +27,6 @@ const HomeScreen = () => {
           </Row>
         </>
       )}
-      ;
     </>
   );
 };
