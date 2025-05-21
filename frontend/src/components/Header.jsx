@@ -6,14 +6,30 @@ import {
   NavDropdown,
 } from "react-bootstrap";
 import { FaShoppingCart, FaUser } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link , useNavigate } from "react-router-dom";
+import { useLogoutMutation } from "../slices/UsersApiSlice";
+import { logout } from "../slices/loginSlice";
+import { useSelector , useDispatch } from "react-redux";
 const Header = () => {
   const { cartItems } = useSelector((state) => state.cart);
   const { userInfo } = useSelector((state) => state.logIn);
 
-  const logoutHandler = ()=>{
-    console.log('logout');
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [logoutApiCall] = useLogoutMutation();
+
+
+
+  const logoutHandler =  async ()=>{
+   try {
+    await logoutApiCall().unwrap();
+    dispatch(logout());  
+    navigate('/login');
+   } catch (err) {
+     console.log(err);
+     
+   }
     
   }
 
