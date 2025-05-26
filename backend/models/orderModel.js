@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const oderSchema = new mongoose.Schema(
+const orderSchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
@@ -8,10 +8,10 @@ const oderSchema = new mongoose.Schema(
       ref: "User",
     },
 
-    oderItems: [
+    orderItems: [
       {
         name: { type: String, required: true },
-        qty: { type: Number, required: true },
+        quantity: { type: Number, required: true },
         image: { type: String, required: true },
         price: { type: Number, required: true },
         product: {
@@ -102,6 +102,6 @@ const oderSchema = new mongoose.Schema(
   }
 );
 
-const Order = mongoose.model("Order", oderSchema);
+const Order = mongoose.model("Order", orderSchema);
 
 export default Order;
