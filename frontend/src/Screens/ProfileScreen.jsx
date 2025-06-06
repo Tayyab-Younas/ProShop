@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Table, Form, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { FaTimes } from "react-icons/fa";
 import Message from "../components/Message";
@@ -10,10 +11,10 @@ import { setCredentials } from "../slices/loginSlice";
 import { useGetMyOrdersQuery } from "../slices/orderApiSlice";
 
 const ProfileScreen = () => {
-  const [name, setName] = useState();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [confirmPassword, setConfirmPassword] = useState();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const dispatch = useDispatch();
 
@@ -146,14 +147,11 @@ const ProfileScreen = () => {
                   </td>
 
                   <td>
-                    <Button
-                      className="btn-sm"
-                      variant="light"
-                      as="Link"
-                      to={`/order/${order._id}`}
-                    >
-                      Details
-                    </Button>
+                    <Link to={`/order/${order._id}`}>
+                      <Button className="btn-sm" variant="light">
+                        Details
+                      </Button>
+                    </Link>
                   </td>
                 </tr>
               ))}
