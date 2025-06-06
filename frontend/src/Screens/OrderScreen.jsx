@@ -7,7 +7,6 @@ import {
   Card,
 } from "react-bootstrap";
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
-import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 import Message from "../components/Message";
@@ -37,8 +36,6 @@ const OrderScreen = () => {
     isLoading: loadingPayPal,
     error: errorPayPal,
   } = useGetPayPalClientIdQuery();
-
-  const { userInfo } = useSelector((state) => state.logIn);
 
   useEffect(() => {
     if (!errorPayPal && !loadingPayPal && paypal.clientId) {
@@ -71,11 +68,11 @@ const OrderScreen = () => {
       }
     });
   }
-  {/*async function onApproveTest() {
+  /*async function onApproveTest() {
     await payOrder({ orderId, details: { payer: {} } });
     refetch();
     toast.success("Payment successful");
-  }*/}
+  }*/
   function onError(err) {
     toast.error(err.message);
   }
