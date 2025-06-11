@@ -1,15 +1,9 @@
-import {
-  Badge,
-  Navbar,
-  Nav,
-  Container,
-  NavDropdown,
-} from "react-bootstrap";
+import { Badge, Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
 import { FaShoppingCart, FaUser } from "react-icons/fa";
-import { Link , useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useLogoutMutation } from "../slices/UsersApiSlice";
 import { logout } from "../slices/loginSlice";
-import { useSelector , useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 const Header = () => {
   const { cartItems } = useSelector((state) => state.cart);
   const { userInfo } = useSelector((state) => state.logIn);
@@ -19,19 +13,15 @@ const Header = () => {
 
   const [logoutApiCall] = useLogoutMutation();
 
-
-
-  const logoutHandler =  async ()=>{
-   try {
-    await logoutApiCall().unwrap();
-    dispatch(logout());  
-    navigate('/login');
-   } catch (err) {
-     console.log(err);
-     
-   }
-    
-  }
+  const logoutHandler = async () => {
+    try {
+      await logoutApiCall().unwrap();
+      dispatch(logout());
+      navigate("/login");
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <header>
@@ -55,9 +45,9 @@ const Header = () => {
               {userInfo ? (
                 <NavDropdown title={userInfo.name} id="username">
                   <NavDropdown.Item as={Link} to="/profile">
-                      Profile
+                    Profile
                   </NavDropdown.Item>
-                  <NavDropdown.Item onClick={logoutHandler} >
+                  <NavDropdown.Item onClick={logoutHandler}>
                     logout
                   </NavDropdown.Item>
                 </NavDropdown>
@@ -71,12 +61,17 @@ const Header = () => {
                   Sign In
                 </Nav.Link>
               )}
-              {userInfo && userInfo.isAdmin &&(
-                <NavDropdown title='Admin' id='adminmenu'>
-                  <NavDropdown.Item as={Link} to={'/admin/productlist'}>Products</NavDropdown.Item>
-                  <NavDropdown.Item as={Link} to={'/admin/userlist'}>Users</NavDropdown.Item>
-                  <NavDropdown.Item as={Link} to={'/admin/orderlist'}>Orders</NavDropdown.Item>
-
+              {userInfo && userInfo.isAdmin && (
+                <NavDropdown title="Admin Panel" id="adminmenu">
+                  <NavDropdown.Item as={Link} to={"/admin/productlist"}>
+                    Products
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to={"/admin/userlist"}>
+                    Users
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to={"/admin/orderlist"}>
+                    Orders
+                  </NavDropdown.Item>
                 </NavDropdown>
               )}
             </Nav>
