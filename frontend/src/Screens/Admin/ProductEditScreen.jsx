@@ -31,7 +31,7 @@ const ProductEditScreen = () => {
   const [updateProduct, { isLoading: loadingUpdate }] =
     useUpdateProductMutation();
 
-  const [uploadProductImage, { isLoading: loadingImage }] =
+  const [uploadProductImage] =
     useUploadProductImageMutation();
 
   const navigate = useNavigate();
