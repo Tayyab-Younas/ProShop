@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Rating from "../components/Rating";
 import {
   useGetProductDetailsQuery,
-  useCreateProductMutation,
+  useCreateReviewMutation,
 } from "../slices/productsApiSlice";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
@@ -35,12 +35,12 @@ const ProductScreen = () => {
   const {
     data: product,
     isLoading,
-    error,
     refetch,
+    error,
   } = useGetProductDetailsQuery(productId);
 
   const [createReview, { isLoading: LoadingProductReview }] =
-    useCreateProductMutation();
+    useCreateReviewMutation();
 
   const { userInfo } = useSelector((state) => state.logIn);
 
