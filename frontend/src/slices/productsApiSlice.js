@@ -5,8 +5,11 @@ import { apiSlice } from "./apiSlice";
 export const productsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getProducts: builder.query({
-      query: () => ({
+      query: ({ pageNumber }) => ({
         url: PRODUCTS_URL,
+        params: {
+          pageNumber,
+        },
       }),
       keepUnusedDataFor: 5,
     }),
@@ -47,7 +50,7 @@ export const productsApiSlice = apiSlice.injectEndpoints({
     createReview: builder.mutation({
       query: (data) => ({
         url: `${PRODUCTS_URL}/${data.productId}/reviews`,
-        method: 'POST',
+        method: "POST",
         body: data,
       }),
       invalidatesTags: ["product"],
