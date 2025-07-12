@@ -1,6 +1,6 @@
 import { Pagination } from "react-bootstrap";
 import { Link } from "react-router-dom";
-const Paginate = ({ pages, page, isAdmin = false }) => {
+const Paginate = ({ pages, page, isAdmin = false, keyword = "" }) => {
   return (
     pages > 1 && (
       <Pagination>
@@ -8,7 +8,13 @@ const Paginate = ({ pages, page, isAdmin = false }) => {
           <Pagination.Item
             as={Link}
             key={x + 1}
-            to={!isAdmin ? `/page/${x + 1}` : `/admin/productlist/${x + 1}`}
+            to={
+              !isAdmin
+                ? keyword
+                  ? `/search/${keyword}/page/${x + 1}`
+                  : `/page/${x + 1}`
+                : `/admin/productlist/${x + 1}`
+            }
             active={x + 1 === page}
           >
             {x + 1}
@@ -16,7 +22,7 @@ const Paginate = ({ pages, page, isAdmin = false }) => {
         ))}
       </Pagination>
     )
-  ); 
+  );
 };
 
 export default Paginate;
