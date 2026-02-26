@@ -11,42 +11,39 @@ import orderRoutes from "./routes/orderRoutes.js";
 import uploadRoutes from "./routes/uploadRoutes.js";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 
+const app = express();
 const port = process.env.PORT || 5000;
 
-ConnectDB(); // Connect to MongoDB
+// Connect to MongoDB
+ConnectDB();
 
-const app = express();
-
-app.use(cors())
-
+// Middleware
+app.use(cors());
 app.use(express.json());
-
 app.use(express.urlencoded({ extended: true }));
-
 app.use(cookieParser());
 
-app.get("/", (req, res) => {
-  res.send("API is running...");
-});
-
+// API routes
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/upload", uploadRoutes);
 
 app.get("/api/config/paypal", (req, res) =>
-  res.send({ clientId: process.env.PAYPAL_CLIENT_ID })
+  res.send({ clientId: process.env.PAYPAL_CLIENT_ID }),
 );
 
-const __dirname = path.resolve(); //set __dirname to current directory
-
+// Static uploads folder
+const __dirname = path.resolve();
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
+// Serve React frontend in production
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "frontend", "build")));
 
-  app.get("*", (req, res) =>
-    res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"))
+  // **Catch-all frontend route using /* to avoid PathError**
+  app.get("/*", (req, res) =>
+    res.sendFile(path.join(__dirname, "frontend", "build", "index.html")),
   );
 } else {
   app.get("/", (req, res) => {
@@ -54,6 +51,9 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
+// Error handling
 app.use(notFound);
 app.use(errorHandler);
+
+// Start server
 app.listen(port, () => console.log(`Server is running on port ${port}`));
